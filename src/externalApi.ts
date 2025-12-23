@@ -1,11 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const addImageFlag = (opts: {
-  barcode: string;
+  barcode: string | undefined;
   imgid: string;
-  url: string;
 }) => {
   // TODO: Replace this with NutriPatrol
-  throw new Error("This function is not implemented yet");
+  const {barcode, imgid} = opts;
+  const NutriPatrolURL = 'https://nutripatrol.openfoodfacts.org/flag/image/?'+
+  new URLSearchParams({
+    barcode: barcode || '',
+    image_id: imgid || '',
+    source: "web", flavor: "off",
+  }).toString();
+  try {
+    window.open(NutriPatrolURL, '_blank', 'noopener,noreferrer');
+  } catch (error) {
+    throw new Error("Could not open NutriPatrol");
+  }
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
