@@ -67,7 +67,7 @@ export const useFlagImage = (barcode?: string) => {
   const flagImage = React.useCallback(
     (src: string) => {
       const imgid = getImageId(src).toString();
-      externalApi.addImageFlag({ barcode, imgid });
+      externalApi.addImageFlag({ barcode, imgid, url: src });
       setFlagged((prev) => [...prev, imgid]);
     },
     [barcode],
@@ -76,7 +76,7 @@ export const useFlagImage = (barcode?: string) => {
   const deleteFlagImage = React.useCallback(
     (src: string) => {
       const imgid = getImageId(src);
-      externalApi.removeImageFlag({ barcode, imgid });
+      externalApi.removeImageFlag({ barcode, imgid, });
 
       setFlagged((prev) =>
         prev.filter((flaggedImageId) => flaggedImageId !== imgid),
